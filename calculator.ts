@@ -8,6 +8,7 @@ interface Item {
 
 // ======================== initialise items =========================
 
+
 const iron_plate: Item = {
     name:"iron plate",
     time: 1
@@ -20,11 +21,48 @@ const copper_plate = {
     ,
 };
 
+const copper_cable = {
+    name:"copper_cable",
+    time: 0.25,
+    requires: [
+        [copper_plate, 0.5]
+    ]
+};
+
+const stone_plate = {
+    name:"stone_plate plate",
+    time: 0.125,
+    requires: []
+    ,
+};
+
 const gear: Item = {
     name:"gear",
     time: 2,
     requires: [
         [iron_plate, 2]
+    ]
+}
+
+const sand: Item = {
+    name:"sand",
+    time: 0.25,
+    requires: []
+}
+
+const glass: Item = {
+    name:"glass",
+    time: 4,
+    requires: [
+        [sand, 4]
+    ]
+}
+
+const steel: Item = {
+    name:"steel",
+    time: 16,
+    requires: [
+        [iron_plate, 5]
     ]
 }
 
@@ -37,6 +75,26 @@ const science_red: Item = {
     ]
 }
 
+const green_circuit: Item = {
+    name:"green_circuit",
+    time: 0.5,    
+    requires: [
+        [copper_cable, 3],
+        [stone_plate, 1],
+    ]
+};
+
+const solar_panel: Item = {
+    name:"solar panel",
+    time: 10,    
+    requires: [
+        [green_circuit, 15],
+        [glass, 5],
+        [steel, 5],
+        [copper_plate, 5],
+
+    ]
+};
 
 
 // ======================== main =========================
@@ -112,8 +170,8 @@ $$ |  $$ |\$$$$$$$\ $$$$$$$  |$$$$$$$  |\$$$$$$  |\$$$$$$  |$$ |      \$$$$$$$\ 
 `;
 console.log(title);
 console.log("Enter how many items/second you want to produce");
-console.log(">20");
-let result = assemblerNeeded(science_red, 20);
+console.log(">solar panel: 0.4/sec");
+let result = assemblerNeeded(solar_panel, 0.4);
 
 result.forEach((value: boolean, key: string) => {
     console.log(key.name, ":", value);
